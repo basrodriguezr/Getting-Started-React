@@ -3,6 +3,7 @@ body{
   color: white;  
 }
 
+
 .App div{
   text-align: center; 
   width: 100%;
@@ -20,6 +21,10 @@ body{
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+#root{
+  margin: 30px;
 }
 
 @media (prefers-reduced-motion: no-preference) {

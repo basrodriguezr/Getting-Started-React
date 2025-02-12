@@ -37,12 +37,16 @@ function App() {
     }
   ];
 
+  function handleClick(product){
+    alert(`clickeamos sobre el producto ${product.title} de precio $${product.price}`)
+  }
+
   return (
     <div className="App">
       <ProductList>
-        <ProductCard product={product[0]}/>
-        <ProductCard product={product[1]}/>
-        <ProductCard product={product[2]}/>
+        <ProductCard width='96px' height='96px' background='darkolivegreen' product={product[0]} onClick={handleClick}/>
+        <ProductCard width='64px' height='64px' product={product[1]} onClick={handleClick}/>
+        <ProductCard width='128px' height='128px' background='peru' product={product[2]} onClick={handleClick}/>
       </ProductList>
     </div>
   );

@@ -1,37 +1,61 @@
-export function ProductCard(props){  
+/*
+  Puede ser esta forma
+  export function ProductCard(props){  
+    const product = props.product;
+
+    o esta
+
+    export function ProductCard({ product }){  
+
+*/
+/*
+Puede ser asi
+export function ProductCard({product, background = "slategray", width, height}){  
+
+o así
+
+export function ProductCard({product, background = "slategray", ...restProps}){  
+
+*/
+  export function ProductCard({product, background = "slategray", onClick, ...restProps}){  
 
     function getProductTitle(){
-        return props.product.title;
+        return product.title;
     }
 
     function getImageSrc(){
-        return props.product.imageSrc;
+        return product.imageSrc;
     }
 
     function getSpecification(index){
-        return props.product.specification[index];
+        return product.specification[index];
     }
 
     function getPrice(){
-        return props.product.price;
+        return product.price;
     }
 
+    //Se puede usar el spread operator feature (...restProps) para desempacar cualquier objeto en uno individual  
+
+    
+      
     return(
       <article 
         style={{
+            background,
             border: "1px solid white",
             borderRadius: "8px",
             padding: "16px",
-            textAlign: "center",
-            width: "50%"       
+            textAlign: "center",  
+            width: "50vh",
+            height: "50vh"
         }}
       >
         <h1>{getProductTitle()}</h1>
         <img 
             src = {getImageSrc()}
             alt = {getProductTitle()}
-            width= "128px" 
-            height= "128px"
+            {...restProps}
         />
         <p>Specification:</p>
         <ul>
@@ -39,7 +63,7 @@ export function ProductCard(props){
           <li>{getSpecification(1)}</li>
           <li>{getSpecification(2)}</li>
         </ul>
-        <button>Buy (from ${getPrice()})</button>
+        <button onClick={() => onClick(product)}>Buy (from ${getPrice()})</button>
       </article>
     );
   }
