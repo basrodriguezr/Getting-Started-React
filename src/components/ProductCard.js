@@ -1,29 +1,19 @@
-export function ProductCard(){
-    const product = {
-        imageSrc: "img/iphone.png",
-        title: "iPhone 15 Pro",
-        specification:[
-            "A17 Pro chip with 6-core GPU",
-            "3x or 5x Telephoto camera",
-            "Up to 29 hours video playback"
-        ],
-        price: 999
-    }
+export function ProductCard(props){  
 
     function getProductTitle(){
-        return product.title;
+        return props.product.title;
     }
 
     function getImageSrc(){
-        return product.imageSrc;
+        return props.product.imageSrc;
     }
 
     function getSpecification(index){
-        return product.specification[index];
+        return props.product.specification[index];
     }
 
     function getPrice(){
-        return product.price;
+        return props.product.price;
     }
 
     return(
@@ -36,7 +26,7 @@ export function ProductCard(){
             width: "50%"       
         }}
       >
-        <h1>{product.title}</h1>
+        <h1>{getProductTitle()}</h1>
         <img 
             src = {getImageSrc()}
             alt = {getProductTitle()}

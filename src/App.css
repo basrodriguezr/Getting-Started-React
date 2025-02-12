@@ -3,15 +3,15 @@ body{
   color: white;  
 }
 
-.App {
+.App div{
   text-align: center; 
-  width: 80%;
+  width: 100%;
   justify-content: center;
   align-items: center;
   display: flex;
 }
 
-.App ul{
+.App div ul{
   list-style-type: none; /* Quita las viñetas de todos los li dentro de este ul */
   margin: 0;
   padding: 0;
