@@ -4,7 +4,7 @@ import { ProductCard } from './components/ProductCard';
 import { ProductList } from './components/ProductList';
 
 function App() {
-  const product = [
+  const products = [
     {
       imageSrc: "img/iphone.png",
       title: "iPhone 13 Pro",
@@ -37,17 +37,38 @@ function App() {
     }
   ];
 
-  function handleClick(product){
-    alert(`clickeamos sobre el producto ${product.title} de precio $${product.price}`)
+  function handleClick(products){
+    alert(`clickeamos sobre el producto ${products.title} de precio $${products.price}`)
   }
 
   return (
     <div className="App">
       <ProductList>
-        <ProductCard width='96px' height='96px' background='darkolivegreen' product={product[0]} onClick={handleClick}/>
-        <ProductCard width='64px' height='64px' product={product[1]} onClick={handleClick}/>
-        <ProductCard width='128px' height='128px' background='peru' product={product[2]} onClick={handleClick}/>
+        {products.map(p => (
+          <ProductCard 
+          key={p.title}
+          products={p} 
+          onClick={handleClick}/>
+        ))}
+        {/* <ProductCard 
+          product={product[0]} 
+          onClick={handleClick}/>
+        <ProductCard 
+          product={product[1]} 
+          onClick={handleClick}/>
+        <ProductCard 
+          product={product[2]} 
+          onClick={handleClick}/> */}
       </ProductList>
+
+      <h2>Products which cost up to $700</h2>
+      <ul>
+        {products.filter(({price})=> price >= 700).map(({title, price}, index) => (
+          <li key={index}>
+            {title} cost ${price}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 

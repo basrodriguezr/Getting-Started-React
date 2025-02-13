@@ -17,22 +17,26 @@ o así
 export function ProductCard({product, background = "slategray", ...restProps}){  
 
 */
-  export function ProductCard({product, background = "slategray", onClick, ...restProps}){  
+  export function ProductCard({
+    products, 
+    background = "slategray", 
+    onClick
+  }){  
 
     function getProductTitle(){
-        return product.title;
+        return products.title;
     }
 
     function getImageSrc(){
-        return product.imageSrc;
+        return products.imageSrc;
     }
 
     function getSpecification(index){
-        return product.specification[index];
+        return products.specification[index];
     }
 
     function getPrice(){
-        return product.price;
+        return products.price;
     }
 
     //Se puede usar el spread operator feature (...restProps) para desempacar cualquier objeto en uno individual  
@@ -55,15 +59,19 @@ export function ProductCard({product, background = "slategray", ...restProps}){
         <img 
             src = {getImageSrc()}
             alt = {getProductTitle()}
-            {...restProps}
+            width={128}
+            height={128}
         />
         <p>Specification:</p>
         <ul>
-          <li>{getSpecification(0)}</li>
-          <li>{getSpecification(1)}</li>
-          <li>{getSpecification(2)}</li>
+          {
+            products.specification.map((spec, index) => 
+              <li key={index}>{spec}</li>
+            )
+          }
+          
         </ul>
-        <button onClick={() => onClick(product)}>Buy (from ${getPrice()})</button>
+        <button onClick={() => onClick(products)}>Buy (from ${getPrice()})</button>
       </article>
     );
   }
