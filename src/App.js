@@ -14,6 +14,7 @@ function App() {
           "3x or 5x Telephoto camera",
           "Up to 29 hours video playback"
       ],
+      stockCount: 15,
       price: 666
     },
     {
@@ -24,6 +25,7 @@ function App() {
           "3x or 5x Telephoto camera",
           "Up to 29 hours video playback"
       ],
+      stockCount: 0,
       price: 999
     },
     {
@@ -34,6 +36,7 @@ function App() {
           "3x or 5x Telephoto camera",
           "Up to 29 hours video playback"
       ],
+      stockCount: 10,
       price: 1399
     }
   ];

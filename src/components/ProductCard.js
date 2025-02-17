@@ -42,14 +42,15 @@ export function ProductCard({product, background = "slategray", ...restProps}){
     function getPrice(){
         return products.price;
     }
-
-    
-    function handleClick(){
-      alert(`clickeamos sobre el producto ${products.title} de precio $${products.price}`)
-    }
     //Se puede usar el spread operator feature (...restProps) para desempacar cualquier objeto en uno individual  
 
-    
+    function Status({ stockCount }){
+      if(stockCount === 0){
+        return <p style={{fontSize: '14px',color:'lightsalmon'}}>Not Avaliable</p>
+      }
+
+      return <p style={{fontSize: '14px',color:'lightgreen'}}>{ stockCount } items avaliable</p>
+    }
       
     return(
       <article 
@@ -59,10 +60,9 @@ export function ProductCard({product, background = "slategray", ...restProps}){
             borderRadius: "8px",
             padding: "16px",
             textAlign: "center",  
-            width: "50vh",
-            height: "50vh"
-        }}
-      >
+            minWidth: "50vh",
+            minHeight: "50vh"
+        }}>
         <h1>{getProductTitle()}</h1>
         <img 
             src = {getImageSrc()}
@@ -76,13 +76,18 @@ export function ProductCard({product, background = "slategray", ...restProps}){
             products.specification.map((spec, index) => 
               <li key={index}>{spec}</li>
             )
-          }
-          
+          }          
         </ul>
-        <button onClick={() => onClick(products)}>Buy (from ${getPrice()})</button>
+        <Status stockCount={products.stockCount}></Status>
+        
+        {
+          products.stockCount > 0 && 
+          <button onClick={() => onClick(products)}>Buy (from ${getPrice()})</button>
+        }
       </article>
     );
   }
+
 
   
   
