@@ -20,7 +20,11 @@ export function ProductCard({product, background = "slategray", ...restProps}){
   export function ProductCard({
     products, 
     background = "slategray", 
-    onClick
+    onClick,
+    getProductTitle,
+    getImageSrc,
+    getSpecification,
+    getPrice
   }){  
 
     function getProductTitle(){
@@ -39,6 +43,10 @@ export function ProductCard({product, background = "slategray", ...restProps}){
         return products.price;
     }
 
+    
+    function handleClick(){
+      alert(`clickeamos sobre el producto ${products.title} de precio $${products.price}`)
+    }
     //Se puede usar el spread operator feature (...restProps) para desempacar cualquier objeto en uno individual  
 
     

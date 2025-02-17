@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { ProductCard } from './components/ProductCard';
 import { ProductList } from './components/ProductList';
+import { Fragment } from "react";
 
 function App() {
   const products = [
@@ -50,47 +51,25 @@ function App() {
           products={p} 
           onClick={handleClick}/>
         ))}
-        {/* <ProductCard 
-          product={product[0]} 
-          onClick={handleClick}/>
-        <ProductCard 
-          product={product[1]} 
-          onClick={handleClick}/>
-        <ProductCard 
-          product={product[2]} 
-          onClick={handleClick}/> */}
       </ProductList>
 
       <h2>Products which cost up to $700</h2>
-      <ul>
-        {products.filter(({price})=> price >= 700).map(({title, price}, index) => (
-          <li key={index}>
-            {title} cost ${price}
-          </li>
-        ))}
-      </ul>
+     
+        {products
+          .filter(({price})=> price >= 700)
+          .map(({title, price}, index) => (
+            <Fragment key={index}>
+              <hr style={{borderColor: 'yellowgreen' }} />
+              <p >
+                {title} cost ${price}
+              </p>
+            </Fragment>
+            
+          ))
+        }
+     
     </div>
   );
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
 }
 
 export default App;
