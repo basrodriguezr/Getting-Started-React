@@ -4,6 +4,10 @@ import { ProductCard } from './components/ProductCard';
 import { ProductList } from './components/ProductList';
 import { Fragment } from "react";
 
+const styles = {
+  divider: {borderColor: 'yellowgreen'}
+}
+
 function App() {
   const products = [
     {
@@ -62,7 +66,7 @@ function App() {
           .filter(({price})=> price >= 700)
           .map(({title, price}, index) => (
             <Fragment key={index}>
-              <hr style={{borderColor: 'yellowgreen' }} />
+              <hr style={styles.divider} />
               <p >
                 {title} cost ${price}
               </p>

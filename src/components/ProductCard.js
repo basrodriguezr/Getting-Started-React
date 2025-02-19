@@ -17,14 +17,30 @@ o así
 export function ProductCard({product, background = "slategray", ...restProps}){  
 
 */
+
+  const styles = {
+    Container:{
+      border: "1px solid white",
+      borderRadius: "8px",
+      padding: "16px",
+      textAlign: "center",  
+      minWidth: "50vh",
+      minHeight: "50vh"
+    },
+    List: {
+      listStyle: "none", /* Quita las viñetas de todos los li dentro de este ul */
+      margin: 0,
+      padding: 0,
+    },
+    NotAvailableStatus:{fontSize: '14px',color:'lightsalmon'},
+    AvailableStatus:{fontSize: '14px',color:'lightgreen'},
+
+  }
+
   export function ProductCard({
     products, 
     background = "slategray", 
-    onClick,
-    getProductTitle,
-    getImageSrc,
-    getSpecification,
-    getPrice
+    onClick
   }){  
 
     function getProductTitle(){
@@ -35,10 +51,6 @@ export function ProductCard({product, background = "slategray", ...restProps}){
         return products.imageSrc;
     }
 
-    function getSpecification(index){
-        return products.specification[index];
-    }
-
     function getPrice(){
         return products.price;
     }
@@ -46,23 +58,15 @@ export function ProductCard({product, background = "slategray", ...restProps}){
 
     function Status({ stockCount }){
       if(stockCount === 0){
-        return <p style={{fontSize: '14px',color:'lightsalmon'}}>Not Avaliable</p>
+        return <p style={styles.NotAvailableStatus}>Not Avaliable</p>
       }
 
-      return <p style={{fontSize: '14px',color:'lightgreen'}}>{ stockCount } items avaliable</p>
+      return <p style={styles.AvailableStatus}>{ stockCount } items avaliable</p>
     }
       
     return(
       <article 
-        style={{
-            background,
-            border: "1px solid white",
-            borderRadius: "8px",
-            padding: "16px",
-            textAlign: "center",  
-            minWidth: "50vh",
-            minHeight: "50vh"
-        }}>
+        style={{...styles.Container, background}}>
         <h1>{getProductTitle()}</h1>
         <img 
             src = {getImageSrc()}
@@ -71,7 +75,7 @@ export function ProductCard({product, background = "slategray", ...restProps}){
             height={128}
         />
         <p>Specification:</p>
-        <ul>
+        <ul style={styles.List}>
           {
             products.specification.map((spec, index) => 
               <li key={index}>{spec}</li>

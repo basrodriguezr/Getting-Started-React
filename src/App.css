@@ -12,12 +12,6 @@ body{
   display: flex;
 }
 
-.App div ul{
-  list-style-type: none; /* Quita las viñetas de todos los li dentro de este ul */
-  margin: 0;
-  padding: 0;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
