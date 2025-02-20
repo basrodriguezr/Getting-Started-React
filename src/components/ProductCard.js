@@ -1,4 +1,4 @@
-import './ProductCard.css'
+import styles from "./ProductCard.module.css"
 /*
   Puede ser esta forma
   export function ProductCard(props){  
@@ -40,15 +40,15 @@ export function ProductCard({product, background = "slategray", ...restProps}){
 
     function Status({ stockCount }){
       if(stockCount === 0){
-        return <p className='NotAvailableStatus'>Not Avaliable</p>
+        return <p className={styles.NotAvailableStatus}>Not Avaliable</p>
       }
 
-      return <p className='AvailableStatus'>{ stockCount } items avaliable</p>
+      return <p className={styles.AvailableStatus}>{stockCount} items avaliable</p>
     }
       
     return(
       <article
-        className="Container" 
+        className={styles.Container} 
         style={{background}}>
         <h1>{getProductTitle()}</h1>
         <img 
@@ -58,7 +58,7 @@ export function ProductCard({product, background = "slategray", ...restProps}){
             height={128}
         />
         <p>Specification:</p>
-        <ul className='List'>
+        <ul className={styles.List}>
           {
             products.specification.map((spec, index) => 
               <li key={index}>{spec}</li>

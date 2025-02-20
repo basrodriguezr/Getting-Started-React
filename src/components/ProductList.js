@@ -1,10 +1,10 @@
-import "./ProductList.css";
+import styles from "./ProductList.module.css"
 
 export function ProductList(props){
     return(
         <>
             <h2>Products</h2>
-            <div className="divFather" >{props.children}</div>
+            <div className={styles.divFather} >{props.children}</div>
         </>
     );
 }
