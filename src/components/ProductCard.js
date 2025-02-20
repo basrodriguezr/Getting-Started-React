@@ -25,18 +25,14 @@ export function ProductCard({product, background = "slategray", ...restProps}){
     onClick
   }){  
 
-    function getProductTitle(){
-        return products.title;
-    }
-
-    function getImageSrc(){
-        return products.imageSrc;
-    }
-
-    function getPrice(){
-        return products.price;
-    }
     //Se puede usar el spread operator feature (...restProps) para desempacar cualquier objeto en uno individual  
+    let stockCount = products.stockCount;
+
+    function handleClick(){
+      stockCount = stockCount-1;
+      console.log("stockCount", stockCount);
+      onClick(products);
+    }
 
     function Status({ stockCount }){
       if(stockCount === 0){
@@ -50,10 +46,10 @@ export function ProductCard({product, background = "slategray", ...restProps}){
       <article
         className={styles.Container} 
         style={{background}}>
-        <h1>{getProductTitle()}</h1>
+        <h1>{products.title}</h1>
         <img 
-            src = {getImageSrc()}
-            alt = {getProductTitle()}
+            src = {products.imageSrc}
+            alt = {products.title}
             width={128}
             height={128}
         />
@@ -65,11 +61,11 @@ export function ProductCard({product, background = "slategray", ...restProps}){
             )
           }          
         </ul>
-        <Status stockCount={products.stockCount}></Status>
+        <Status stockCount={stockCount}></Status>
         
         {
-          products.stockCount > 0 && 
-          <button onClick={() => onClick(products)}>Buy (from ${getPrice()})</button>
+          stockCount > 0 && 
+          <button onClick={() => handleClick()}>Buy (from ${products.price})</button>
         }
       </article>
     );
