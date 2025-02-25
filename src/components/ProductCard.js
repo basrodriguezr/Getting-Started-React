@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./ProductCard.module.css"
 /*
   Puede ser esta forma
@@ -26,12 +27,21 @@ export function ProductCard({product, background = "slategray", ...restProps}){
   }){  
 
     //Se puede usar el spread operator feature (...restProps) para desempacar cualquier objeto en uno individual  
-    let stockCount = products.stockCount;
+    //let stockCount = products.stockCount;
+    const [stockCount, setStockCount] = useState(products.stockCount);
+    const [showMore, setShowMore] = useState(false);
 
     function handleClick(){
-      stockCount = stockCount-1;
-      console.log("stockCount", stockCount);
+      setStockCount((prevStockCount) => prevStockCount - 1);
+
       onClick(products);
+    }
+
+    function handleTwoClicks(){
+      setStockCount((prevStockCount) => prevStockCount - 1);
+      setStockCount((prevStockCount) => prevStockCount - 1);
+
+      onClick(products);     
     }
 
     function Status({ stockCount }){
@@ -53,19 +63,29 @@ export function ProductCard({product, background = "slategray", ...restProps}){
             width={128}
             height={128}
         />
-        <p>Specification:</p>
-        <ul className={styles.List}>
+        <p>Specification:{' '}
+          <button onClick={()=> setShowMore(!showMore)}>{showMore ? 'hide' : 'show'}</button>
+        </p>
+        {showMore && <ul className={styles.List}>
           {
             products.specification.map((spec, index) => 
               <li key={index}>{spec}</li>
             )
           }          
-        </ul>
-        <Status stockCount={stockCount}></Status>
-        
+        </ul>}
+        <Status stockCount={stockCount}></Status>       
         {
-          stockCount > 0 && 
-          <button onClick={() => handleClick()}>Buy (from ${products.price})</button>
+          stockCount > 0 && (
+          <>
+            <p>Price: $ {products.price}</p>
+            <button onClick={() => handleClick()}>Buy</button>
+          </>
+        )}
+        {
+          stockCount > 1 &&
+          <>
+            <button onClick={() => handleTwoClicks()}>Buy 2</button>
+          </>
         }
       </article>
     );

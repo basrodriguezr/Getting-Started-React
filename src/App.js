@@ -41,7 +41,7 @@ function App() {
     }
   ];
 
-  function handleClick(products){
+  function onClick(products){
     alert(`clickeamos sobre el producto ${products.title} de precio $${products.price}`)
   }
 
@@ -52,7 +52,7 @@ function App() {
           <ProductCard 
           key={p.title}
           products={p} 
-          onClick={handleClick}/>
+          onClick={onClick}/>
         ))}
       </ProductList>
 
