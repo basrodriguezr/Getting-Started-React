@@ -2,7 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import { ProductCard } from './components/ProductCard';
 import { ProductList } from './components/ProductList';
-import { Fragment } from "react";
+import { ProductFilter } from "./components/ProductFilter";
+import { Fragment, useState } from "react";
 
 function App() {
   const products = [
@@ -41,8 +42,26 @@ function App() {
     }
   ];
 
-  function onClick(products){
+  const [filters, setFilters] = useState({
+    price:{
+      min: 0,
+      max: 999,
+    },
+    other: 'other value'
+  });
+
+  function handlePurchase(products){
     alert(`clickeamos sobre el producto ${products.title} de precio $${products.price}`)
+  }
+
+  function handleFilter(key, value){
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      price: {
+        ...prevFilters.price,
+        [key]: value,
+      }
+    }))
   }
 
   return (
@@ -52,22 +71,21 @@ function App() {
           <ProductCard 
           key={p.title}
           products={p} 
-          onClick={onClick}/>
+          onClick={handlePurchase}/>
         ))}
       </ProductList>
 
-      <h2>Products which cost up to $700</h2>
-     
+      <h2>Products Filtered by price</h2>
+      <ProductFilter filters={filters} onFilter={handleFilter}/>
         {products
-          .filter(({price})=> price >= 700)
-          .map(({title, price}, index) => (
-            <Fragment key={index}>
+          .filter(({price})=> price >= filters.price.min && price <= filters.price.max)
+          .map(({title, price}) => (
+            <Fragment key={title}>
               <hr className="divider" />
               <p >
                 {title} cost ${price}
               </p>
-            </Fragment>
-            
+            </Fragment>            
           ))
         }
      
