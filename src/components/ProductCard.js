@@ -23,7 +23,9 @@ export function ProductCard({product, background = "slategray", ...restProps}){
   export function ProductCard({
     products, 
     background = "slategray", 
-    onClick
+    onClick,
+    onFavorite,
+    isFavorite
   }){  
 
     //Se puede usar el spread operator feature (...restProps) para desempacar cualquier objeto en uno individual  
@@ -53,9 +55,8 @@ export function ProductCard({product, background = "slategray", ...restProps}){
     }
       
     return(
-      <article
-        className={styles.Container} 
-        style={{background}}>
+      <article className={styles.Container} style={{background}}>
+        <button className={styles.Favorite} onClick={() => onFavorite(products.id)}>{isFavorite ? '💙': '🤍'}</button>
         <h1>{products.title}</h1>
         <img 
             src = {products.imageSrc}

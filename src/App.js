@@ -8,6 +8,7 @@ import { Fragment, useState } from "react";
 function App() {
   const products = [
     {
+      id: 1,
       imageSrc: "img/iphone.png",
       title: "iPhone 13 Pro",
       specification:[
@@ -19,6 +20,7 @@ function App() {
       price: 666
     },
     {
+      id: 2,
       imageSrc: "img/iphone.png",
       title: "iPhone 14 Pro",
       specification:[
@@ -30,6 +32,7 @@ function App() {
       price: 999
     },
     {
+      id: 3,
       imageSrc: "img/iphone.png",
       title: "iPhone 15 Pro",
       specification:[
@@ -50,6 +53,8 @@ function App() {
     other: 'other value'
   });
 
+  const [favorites, setFavorites] = useState([]);
+
   function handlePurchase(products){
     alert(`clickeamos sobre el producto ${products.title} de precio $${products.price}`)
   }
@@ -64,6 +69,16 @@ function App() {
     }))
   }
 
+  function handleFavorite(productID){
+      if(favorites.includes(productID)){
+        //remove
+
+        setFavorites((prevFavorites) => prevFavorites.filter((id => id !== productID)));
+      }else{
+        setFavorites((prevFavorites) => [...prevFavorites, productID])
+      }
+  }
+
   return (
     <div className="App">
       <ProductList>
@@ -71,7 +86,10 @@ function App() {
           <ProductCard 
           key={p.title}
           products={p} 
-          onClick={handlePurchase}/>
+          isFavorite={favorites.includes(p.id)}
+          onClick={handlePurchase}
+          onFavorite={handleFavorite}
+          />
         ))}
       </ProductList>
 
